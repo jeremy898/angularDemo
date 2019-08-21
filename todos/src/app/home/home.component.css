@@ -1,0 +1,106 @@
+:host {
+    text-align: center;
+  }
+
+  nz-header,
+  nz-footer {
+    padding: 0 300px;
+    background: rgba(206, 61, 62);
+    color: #fff;
+  }
+
+  nz-footer {
+    line-height: 1.5;
+  }
+
+  nz-sider {
+    background: rgba(245,245,245);
+    /* color: #fff; */
+  }
+
+  nz-content {
+    background: #fff ;
+    padding: 0 200px; 
+    color: #fff;
+    min-height: 120px;
+    line-height: 120px;
+  }
+
+  nz-layout {
+    margin-bottom: 48px;
+  }
+
+  nz-layout:last-child {
+    margin: 0;
+  }
+  .logo {
+    position: absolute;
+    width: 150px;
+    height: 48px;
+    background: url("../../assets/logo.png") no-repeat left center;
+    background-size: cover;
+    top: 5px;
+  }
+  .tabs-list{
+    /* height: 100%; */
+    position: absolute;
+    left: 400px;
+  }
+  .tabs-list ul>li{
+    width: 100px;
+    line-height: 65px;
+    float: left;
+    list-style: none;
+  }
+  .tabs-list ul>li:hover{
+      background-color: rgba(15, 17, 19, 0.4);
+  }
+  .seachbar{
+    position: absolute;
+    right: 650px; 
+    width: 200px;
+  }
+  .login{
+      position: absolute;
+      right: 250px;
+  }
+  .swiper-container {
+    height: 300px;
+}  
+.swiper-slide img{
+    width: 100%;
+    height: 100%;
+}
+.button-prev .button-next{
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -31px;
+    width: 37px;
+    height: 63px;
+    text-indent: -9999px;
+    color: #000;
+}
+.play-bar{
+  position:fixed;
+  left: 0;
+  right: 0;
+  bottom: -48px;
+  padding: 20px;
+  height: 56px;
+  background: rgba(50, 49, 49);
+  transition: bottom 0.2s;
+}
+.play-bar:hover{
+  bottom: 0px;
+}
+.player{
+  display: flex;
+  padding: 0 600px;
+  color: #fff;
+}
+.play{
+  font-size: 14px;
+  color: #fff;
+  display: flex;
+}

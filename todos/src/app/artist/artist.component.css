@@ -1,0 +1,90 @@
+:host{
+    text-align: left;
+}
+.list-header{
+    display: flex;
+    padding: 30px 50px;
+    line-height: 2em;
+    font-size: 14px;
+}
+.cover{
+    position: relative;
+    flex: 1;
+}
+.cover img{ 
+    width: 200px;
+    /* height: 100%; */
+}
+.list-right{
+    flex: 2;
+}
+.hd{
+    color: #000;
+    display: inline-block;
+}
+.hd .tit{
+    margin-left: 10px;
+    display: inline-block;
+}
+.msk{
+    position: absolute;
+    width: 208px;
+    height: 208px;
+    background-position: 0 -1285px;
+    top: -4px;
+    left: -4px;
+    border: 1px solid #cccccc;
+}
+.user{
+    font-size: 14px;
+    color: #000;
+}
+.button{
+    padding: 10px 0;
+}
+.button button{
+    margin-right: 6px;
+}
+.inter{
+    line-height: 2em;
+    font-size: 14px;
+    color: #666;
+}
+.list-body{
+    padding: 0 50px;
+    font-size: 16px;
+    color: #000;
+}
+.list-body .u-title{
+    line-height: 2em;
+}
+.list-body .sub{
+    font-size: 12px;
+    margin: 9px 0 0 20px;
+    color: #666;
+}
+.list-body .out-list{
+    margin-right: 20px;
+}
+.table-list{
+    border-top: 2px solid rgba(206, 61, 62);
+    border-bottom: 2px solid rgba(206, 61, 62);
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.table-list .th{
+    border-left: 1px solid #ccc;
+    color: #666;
+}
+.table-list .th:first-child{
+    border-left: none;
+}
+.table-list .td{
+    background-color: rgba(245,245,245);
+}
+.icon{
+    padding: 2px;
+    color: #fff;
+    background-color: rgba(206, 61, 62);
+    border-radius: 50%;
+}

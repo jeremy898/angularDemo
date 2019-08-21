@@ -1,0 +1,61 @@
+.action{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-size: 14px;
+    color: #000;
+}
+.jNGgke{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    overflow: hidden;
+    color: #000;
+}
+.gLcLGM{
+    color: #000;
+    font-size: 14px;
+    flex: 0 0 auto;
+    border-radius: 10px;
+    line-height: 1em;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+.wrapper {
+    padding: 0 50px;
+  }
+  .box{
+      width: 140px;
+      height: 140px;
+      position: relative;
+      cursor:pointer;
+  }
+  .box img{
+    width: 100%;
+  }
+  .hot-list{
+      float: left;
+      padding: 0 10px;
+      overflow: hidden;
+      /* padding: 0 0 30px 50px; */
+      line-height: 1.4;
+  }
+  .box p a{
+      color: #000;
+  }
+  .icon{
+      padding: 2px;
+      color: #fff;
+      background-color: rgba(206, 61, 62);
+      border-radius: 50%;
+  }
+  .selected{
+    color: rgb(212, 68, 57);
+    opacity: 0.8;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(212, 68, 57);
+    border-image: initial;
+    /* border-radius: 50%;  */
+  }
+  

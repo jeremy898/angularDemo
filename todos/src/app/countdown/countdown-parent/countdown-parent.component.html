@@ -1,0 +1,9 @@
+<h2>Mission Control</h2>
+    <button (click)="announce()">Announce mission</button>
+    <app-countdown-child *ngFor="let astronaut of astronauts"
+      [astronaut]="astronaut">
+    </app-countdown-child>
+    <h3>History</h3>
+    <ul>
+      <li *ngFor="let event of history">{{event}}</li>
+    </ul>

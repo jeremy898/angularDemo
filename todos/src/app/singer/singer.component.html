@@ -1,0 +1,21 @@
+<div class="content" style="padding: 10px 0">
+  <div class="actor">
+    <div class="sc-ckVGcZ jNGgke"><span>分类(默认热门):&nbsp;
+      </span><span class="sc-jKJlTe gLcLGM" [class.selected]='i === isSelected' *ngFor="let item of typeList; let i = index;" (click)='search(i,item.id)'>{{item.name}}</span>
+  </div>
+</div>
+<div class="content-list">
+  <div class="wrapper">
+    <div class="list-bar">
+      <ul style="padding: 0;">
+        <li class="hot-list" *ngFor="let data of singerList">
+          <div class="u-cover box"><img
+              [src]="data.img1v1Url"><a
+              href="/home/artist?id=10559" class="msk"></a></div>
+          <p><a href="/home/artist?id={{data.id}}"  class="nm">{{data.name}}</a>&nbsp;
+              <i nz-icon nzType="user" nzTheme="outline" class="icon"></i></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

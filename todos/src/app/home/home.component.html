@@ -1,0 +1,65 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <div class="tabs-list">
+      <ul>
+        <li routerLink="/home/songList" routerLinkActive="active" (click)="showSwiper($event)">发现音乐</li>
+        <li routerLink="/home/singlist/2819914042" (click)="showSwiper($event)">我的音乐</li>
+        <li routerLink="/home/rank" (click)="showSwiper($event)">排行榜</li>
+        <li routerLink="/home/singer" (click)="showSwiper($event)">歌手</li>
+        <li routerLink="/crisis-center"(click)="showSwiper($event)">下载客户端</li>
+      </ul>
+    </div>
+    <div class="seachbar">
+      <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input type="text" nz-input placeholder="音乐/视频/电台/用户" />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div>
+    <div class="login">
+      <a href="#" style="color:#787878;margin-right: 4px">登录</a>
+      <i nz-icon nzType="down"></i>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-sider></nz-sider>
+    <nz-content>
+    <nz-carousel nzAutoPlay class="swiper-container" *ngIf="isShow" (nzAfterChange)="change($event)" nzDots="true">
+        <div nz-carousel-content *ngFor="let index of slides" class="swiper-slide">
+            <img [src]="index.imageUrl" alt="">
+        </div>
+        <!-- <div class="button-prev" (click)='changePrev($event)'><</div>
+        <div class="button-next" (click)='changeNext($event)'>></div> -->
+      </nz-carousel>
+    <router-outlet></router-outlet>
+    </nz-content>
+    <nz-sider></nz-sider>
+  </nz-layout>
+  <nz-footer>
+    <div class="play-bar">
+      <i nz-icon nzType="rocket" nzTheme="outline" style="position: absolute;right: 10px;top: -12px;font-size: 16px;background-color:rgb(50, 49, 49);border-radius: 80%;padding: 5px"></i>
+      <div class="player">
+         <div class="btn">
+            <i nz-icon nzType="step-backward" nzTheme="outline"></i>
+          <i nz-icon nzType="play-circle" nzTheme="outline"></i>
+          <i nz-icon nzType="step-forward" nzTheme="outline"></i>
+         </div>
+         <div class="play">
+           <div>
+              <img src="https://p1.music.126.net/tyk7m0lkzAyEblOLR6VtGg==/109951163271830284.jpg?param=34y34" alt="">
+           </div>
+           <div class="title">
+            <span>qumu</span><i nz-icon nzType="play-square" nzTheme="outline"></i><span>singer</span>
+           </div>
+           <div class="process">
+            jindutaio
+           </div>
+         </div>
+      </div>
+    </div>
+  </nz-footer>
+</nz-layout>
+<!-- <app-todo></app-todo>
+<app-countdown-parent></app-countdown-parent> -->

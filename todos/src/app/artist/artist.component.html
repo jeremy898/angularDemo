@@ -1,0 +1,63 @@
+<div class="list-header">
+    <div class="cover">
+      <img [src]="playlist && playlist['img1v1Url']" class="j-img">
+      <span class="msk"></span>
+    </div>
+    <div class="list-right">
+      <div class="hd">
+          <i nz-icon nzType="user" nzTheme="outline" class="icon"></i>
+        <div class="tit">
+          <h2 class="f-ff2 f-brk" style="color: #333">{{playlist && playlist['name']}}</h2>
+          <!-- <span *ngFor="let alia of playlist['alias']">{{alia}}</span> -->
+        </div>
+      </div>
+      <div class="button">
+        <button nz-button nzType="primary"><i nz-icon nzType="right-circle" nzTheme="outline"></i>播放</button>
+        <button nz-button nzType="default"><i nz-icon nzType="file-zip" nzTheme="outline"></i>({{playlist && playlist['subscribedCount']}})</button>
+        <button nz-button nzType="default"><i nz-icon nzType="branches" nzTheme="outline"></i>({{playlist && playlist['shareCount']}})</button>
+        <button nz-button nzType="default"><i nz-icon nzType="download" nzTheme="outline"></i>下载</button>
+        <button nz-button nzType="default"><i nz-icon nzType="message" nzTheme="outline"></i>({{playlist && playlist['commentCount']}})</button>
+      </div>
+      <p class="inter">
+        <nz-tag>介绍:</nz-tag>
+        {{playlist && playlist['briefDesc']}} &#8203;&#8203;&#8203;<br>
+      </p>
+    </div>
+  </div>
+  <div class="list-body">
+    <div class="u-title u-title-1 f-cb">
+      <h3 style="float: left;">
+        <span class="f">歌曲列表</span>
+      </h3>
+      <span class="sub"><span>{{listOfData.length}}</span>首歌</span>
+      <!-- <div class="more" style="float: right">播放：<strong>{{playlist && playlist['playCount']}}</strong>次</div> -->
+      <!-- <div class="out out-list" style="float: right">
+        <i nz-icon nzType="play-square" nzTheme="outline"></i>
+        <a style="margin: 0 10px">生成外链播放器</a>
+      </div> -->
+    </div>
+    <div class="song-table">
+        <nz-table #basicTable  [nzData]="listOfData" class="table-list">
+            <thead>
+              <tr>
+                <th class="th"></th>
+                <th class="th">歌曲标题</th>
+                <th class="th">歌手</th>
+                <th class="th">专辑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data; let i=index">
+                <td [class.td]="i%2 == 0">{{i+1}}&nbsp;<i nz-icon nzType="right-circle" nzTheme="outline"></i></td>
+                <td class='td'[class.td]="i%2 == 0">{{data.name}}</td>
+                <td [class.td]="i%2 == 0">
+                  <a>Action 一 {{data.ar[0].name}}</a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                </td>
+                <td [class.td]="i%2 == 0">{{data.al.name}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+    </div>
+  </div>
+  

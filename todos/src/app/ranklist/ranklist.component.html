@@ -1,0 +1,40 @@
+<div class="sc-fjdhpX hbiMsK">
+  <div>
+    <h1 class="offical" style="pointer-events: auto;">官方榜</h1>
+    <ul class="sc-jKJlTe iCxYBm" style="pointer-events: auto;display: flex;">
+      <li class="sc-eNQAEJ eaNeqo"  *ngFor="let item of rankList">
+        <div class="img_wrapper"><img [src]='item.coverImgUrl'
+            alt="" routerLink="/home/singlist/{{item.id}}">
+          <div class="decorate"></div><span class="update_frequecy">{{item.updateFrequency}}</span>
+        </div>
+        <ul class="sc-hMqMXs ivbCFI" style="display: block" *ngIf="item.tracks.length > 0">
+          <li *ngFor='let song of item.tracks;let i = index'>{{i+1}}.{{song.first}}-{{song.second}}</li>
+        </ul>
+      </li>
+    </ul>
+    <!-- <h1 class="offical" style="pointer-events: auto;">全球榜</h1>
+    <ul class="sc-jKJlTe iCxYBm" style="pointer-events: auto;">
+      <li class="sc-eNQAEJ bwpnwF">
+        <div class="img_wrapper"><img src="https://p1.music.126.net/TuGxihwbiPmoHoFGvIuu_w==/109951163781770038.jpg"
+            alt="">
+          <div class="decorate"></div><span class="update_frequecy">每周五更新</span>
+        </div>
+      </li>
+    </ul> -->
+  </div>
+  <div class="sc-jzJRlG PvmHC" style="display: none;">
+    <div class="sc-VigVT gsRScT">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div class="sc-cSHVUG bLJpQU" style="display: none;">
+    <div class="sc-jTzLTM hmXerI">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div><span>拼命加载中...</span>
+    </div>
+  </div>
+</div>
