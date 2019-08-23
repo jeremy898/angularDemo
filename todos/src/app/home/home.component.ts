@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, Output,ElementRef,ViewChild} from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { ActivatedRoute ,Router} from '@angular/router';
+
 import Swiper from 'swiper';
 // import { error } from '@angular/compiler/src/util';
 import {UtilsService} from '../utils.service';
@@ -11,10 +12,11 @@ import {UtilsService} from '../utils.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  @ViewChild('audio') audio: ElementRef;
   constructor(private http : HttpClient,private util :UtilsService,private route:ActivatedRoute,private router: Router) { }
 
   isShow = true
+  playView:{}
    ngOnInit() {
       this.http.get('http://47.105.150.105/m-api/banner').subscribe(res => {
       // console.log(res['banners'])
@@ -29,6 +31,24 @@ export class HomeComponent implements OnInit {
     })
     if(this.router.url.includes('singlist')){
       this.isShow = false
+    }
+    this.route.queryParams.subscribe(res => {
+      this.audio.nativeElement.src ='https://music.163.com/song/media/outer/url?id='+ res.songId +'.mp3'
+      this.audio.nativeElement.play()
+      let id = this.route.children[0].snapshot.params.id
+      this.http.get('http://47.105.150.105/m-api/playlist/detail?id='+id).subscribe(result =>{
+        this.playView = result['playlist']['tracks'].find(item => {
+          return item.id == res.songId
+        })
+      })
+    })
+    this.audio.nativeElement.ontimeupdate = function () {
+      let process = document.getElementsByClassName('son')[0]
+      console.log('播放中')
+      console.log(this.currentTime,this.duration)
+      //就可以计算当前的进度条了 =  视频当前时间 / 视频总时长 变成百分比
+      let perWidth = this.currentTime / this.duration * 100 + "%";
+      process.setAttribute('style',`width: ${perWidth}px`)
     }
   }
   testSwiper: Swiper;
@@ -49,5 +69,19 @@ export class HomeComponent implements OnInit {
     }else{
       this.isShow = true
     }
+  }
+  move(e){
+    let process = document.getElementsByClassName('son')[0]
+    let rect = document.getElementsByClassName('process')[0].getBoundingClientRect()
+    console.log(process)
+    //按钮相对盒子的距离
+    let marWidth = e.clientX - rect.left
+    console.log(marWidth)
+    process.setAttribute('style',`width: ${marWidth}px`)
+  }
+  paused(e){
+    e.stopPropagation()
+    this.audio.nativeElement.pause()
+    console.log('暂停')
   }
 }

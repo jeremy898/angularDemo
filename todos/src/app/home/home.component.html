@@ -41,25 +41,29 @@
     <div class="play-bar">
       <i nz-icon nzType="rocket" nzTheme="outline" style="position: absolute;right: 10px;top: -12px;font-size: 16px;background-color:rgb(50, 49, 49);border-radius: 80%;padding: 5px"></i>
       <div class="player">
-         <div class="btn">
-            <i nz-icon nzType="step-backward" nzTheme="outline"></i>
-          <i nz-icon nzType="play-circle" nzTheme="outline"></i>
-          <i nz-icon nzType="step-forward" nzTheme="outline"></i>
+         <div class="btn" style="font-size: 26px;margin-right: 20px;">
+          <a href="javascript:;" style=" color:inherit;"><i nz-icon nzType="step-backward" nzTheme="outline"></i></a>
+          <a href="javascript:;" style=" color:inherit;"><i nz-icon nzType="play-circle" nzTheme="outline" style="font-size: 32px;margin: 0 10px;" (click)="paused($event)"></i></a>
+          <a href="javascript:;" style=" color:inherit;"><i nz-icon nzType="step-forward" nzTheme="outline"></i></a>
          </div>
          <div class="play">
-           <div>
-              <img src="https://p1.music.126.net/tyk7m0lkzAyEblOLR6VtGg==/109951163271830284.jpg?param=34y34" alt="">
+           <div style="margin-right: 10px;">
+              <img [src]="playView && playView['al'] && playView['al'].picUrl" style="width: 34px;height: 34px;" alt="">
            </div>
-           <div class="title">
-            <span>qumu</span><i nz-icon nzType="play-square" nzTheme="outline"></i><span>singer</span>
-           </div>
-           <div class="process">
-            jindutaio
+           <div class="cdbox" style="display: block;">
+              <div class="title" style="text-align: left;padding: 0 2px 10px;position: relative;">
+                  {{playView && playView['name']}}<i nz-icon nzType="paper-clip" nzTheme="outline" style="margin: 0 5px;"></i><span style="color: #9b9b9b;">{{playView && playView['ar'] && playView['ar'][0].name}}</span>
+                  <span style="position: absolute;right: 0;">00:00/3:21</span>
+                 </div>
+                 <div class="process" (click)="move($event)">
+                  <div class="son">
+                    <span class='cdbtn'></span>
+                  </div>
+                 </div>
            </div>
          </div>
+         <audio controls="controls" style="display: none;" #audio></audio>
       </div>
     </div>
   </nz-footer>
 </nz-layout>
-<!-- <app-todo></app-todo>
-<app-countdown-parent></app-countdown-parent> -->

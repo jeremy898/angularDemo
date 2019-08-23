@@ -85,22 +85,58 @@
   position:fixed;
   left: 0;
   right: 0;
-  bottom: -48px;
-  padding: 20px;
+  bottom: 0px;
+  padding: 10px;
   height: 56px;
   background: rgba(50, 49, 49);
   transition: bottom 0.2s;
 }
 .play-bar:hover{
-  bottom: 0px;
+  /* bottom: 0px; */
 }
 .player{
   display: flex;
-  padding: 0 600px;
+  padding: 0 550px;
   color: #fff;
 }
 .play{
   font-size: 14px;
   color: #fff;
   display: flex;
+  line-height: 1em;
+}
+.process {
+  width: 500px;
+  height: 10px;
+  background-color: rgb(83, 83, 83);
+}
+
+.son {
+  position: relative;
+  background-color: rgb(199, 12, 12);
+  width: 20%;
+  height: 100%;
+}
+.cdbtn{
+    position: absolute;
+    width: 18px;
+    height: 20px;
+    top: 50%;
+    right: -10px;
+    transform:translate(-50%,-50%);
+    border-radius: 50%;
+    background-color: rgb(245, 245, 245);
+    z-index: 999;
+}
+.cdbtn::before{
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    content: '';
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    position: absolute;
+    transform:translate(-50%,-50%);
+    border-radius: 50%;
 }

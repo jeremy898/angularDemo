@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter,Input } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Router,ActivatedRoute} from '@angular/router';
 @Component({
@@ -7,7 +7,6 @@ import { Router,ActivatedRoute} from '@angular/router';
   styleUrls: ['./songlist.component.css']
 })
 export class SonglistComponent implements OnInit {
-
   constructor(private http:HttpClient,private route:ActivatedRoute,private router: Router) { }
   playlist : {};
   listOfData = [];
@@ -18,6 +17,14 @@ export class SonglistComponent implements OnInit {
       // console.log(res)
       this.playlist = res['playlist']
       this.listOfData = res['playlist']['tracks']
+    })
+  }
+  play(id){
+    let songid = id.id
+    this.router.navigate([`home/singlist/${this.route.snapshot.params.id}`], {
+      queryParams: {
+         songId:songid
+      }
     })
   }
 }
