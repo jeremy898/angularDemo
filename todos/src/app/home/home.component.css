@@ -90,6 +90,7 @@
   height: 56px;
   background: rgba(50, 49, 49);
   transition: bottom 0.2s;
+  z-index:999;
 }
 .play-bar:hover{
   /* bottom: 0px; */
@@ -139,4 +140,79 @@
     position: absolute;
     transform:translate(-50%,-50%);
     border-radius: 50%;
+}
+.sound{
+  position: relative;
+  font-size: 20px;
+  margin-left: 20px;
+  line-height: 1.5em;
+}
+.list-number{
+    font-size: 16px;
+    display: inline-block;
+    width: 36px;
+    line-height: 1em;
+    color: #666;
+    text-shadow: 0 1px 0 #080707;
+    text-indent: 0;
+    border: 1px solid #666;
+    border-radius: 10px;
+}
+.m-vol{
+  position: absolute;
+  top: -122px;
+  left: -8px;
+  clear: both;
+  width: 32px;
+  height: 113px;
+  background-color: rgba(40, 40, 40,.9);
+}
+.barbg{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 113px;
+  background-position: 0 -503px;
+}
+.m-vol .curr{
+  width: 100%;
+  position: absolute; 
+  bottom: 0;
+  left: 0;
+  background-position: -40px bottom;
+  overflow: hidden;
+  background-color: rgba(199, 12, 12)
+}
+.vbg{
+  position: absolute;
+  bottom: 6px;
+  left: 14px;
+  width: 4px;
+  height: 93px;
+  background-color: #000;
+}
+.m-vol .btn{
+  position: absolute;
+  top: 0;
+  left: -7px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-position: -40px -250px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.m-vol .btn::before{
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  content: '';
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  position: absolute;
+  transform:translate(-50%,-50%);
+  border-radius: 50%;
 }

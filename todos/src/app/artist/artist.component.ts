@@ -15,10 +15,18 @@ export class ArtistComponent implements OnInit {
     this.route.queryParams.subscribe(res => {
       let id = res.id
       this.http.get('http://47.105.150.105/m-api/artists?id='+ id).subscribe(result => {
-        console.log(result)
         this.listOfData = result['hotSongs']
         this.playlist = result['artist']
       })
+    })  
+  }
+  play(id){
+    let songid = id.id
+    this.router.navigate(['home/artist'], {
+      queryParams: {
+         id:this.route.snapshot.queryParams.id,
+         songId:songid
+      }
     })
   }
 } 

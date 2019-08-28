@@ -30,11 +30,6 @@
         <span class="f">歌曲列表</span>
       </h3>
       <span class="sub"><span>{{listOfData.length}}</span>首歌</span>
-      <!-- <div class="more" style="float: right">播放：<strong>{{playlist && playlist['playCount']}}</strong>次</div> -->
-      <!-- <div class="out out-list" style="float: right">
-        <i nz-icon nzType="play-square" nzTheme="outline"></i>
-        <a style="margin: 0 10px">生成外链播放器</a>
-      </div> -->
     </div>
     <div class="song-table">
         <nz-table #basicTable  [nzData]="listOfData" class="table-list">
@@ -48,7 +43,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of basicTable.data; let i=index">
-                <td [class.td]="i%2 == 0">{{i+1}}&nbsp;<i nz-icon nzType="right-circle" nzTheme="outline"></i></td>
+                  <td [class.td]="i%2 == 0">{{i+1}}&nbsp;<a href="javascript:;"><i nz-icon nzType="right-circle" nzTheme="outline" (click)="play(data)"></i></a></td>
                 <td class='td'[class.td]="i%2 == 0">{{data.name}}</td>
                 <td [class.td]="i%2 == 0">
                   <a>Action 一 {{data.ar[0].name}}</a>
