@@ -181,7 +181,6 @@
   bottom: 0;
   left: 0;
   background-position: -40px bottom;
-  overflow: hidden;
   background-color: rgba(199, 12, 12)
 }
 .vbg{
@@ -189,10 +188,11 @@
   bottom: 6px;
   left: 14px;
   width: 4px;
-  height: 93px;
+  height: 95px;
   background-color: #000;
 }
 .m-vol .btn{
+  z-index: 999;
   position: absolute;
   top: 0;
   left: -7px;
@@ -215,4 +215,42 @@
   position: absolute;
   transform:translate(-50%,-50%);
   border-radius: 50%;
+}
+.play-detail{
+  position: absolute;
+  top: -270px;
+  left: -566px; 
+  width: 558px;
+  height: 260px;
+  background-color: rgba(40, 40, 40,.9);
+  overflow: hidden;
+  overflow-x:hidden; 
+  overflow-y:scroll;
+  border-radius: 8px;
+}
+.play-detail .play-header{
+  background-color: rgb(27, 27, 27);
+  text-align: left;
+  font-size: 12px;
+  padding: 0 20px;
+  line-height: 32px;
+}
+.play-detail .play-header .clear{
+  margin-left: 380px;
+  cursor: pointer;
+}
+.play-detail .detail-list li{
+  list-style: none;
+  font-size: 12px;
+}
+.play-detail .detail-list{
+  text-align: left;
+  list-style: none;
+}
+.overflow{
+  padding-left: 20px;
+}
+.mar{
+  position: absolute;
+  right: 16px;
 }

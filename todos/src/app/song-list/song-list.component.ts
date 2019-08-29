@@ -21,8 +21,4 @@ export class SongListComponent implements OnInit {
       this.songList = res['result']
     })
   }
-  // redirectTo(item){
-  //   console.log(item)
-  //   this.router.navigate
-  // }
 }

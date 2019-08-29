@@ -64,11 +64,24 @@
            </div>
            <div class="sound">
             <i nz-icon nzType="sound" nzTheme="outline" style="margin-right:10px;" (click)="changeSound()"></i>
-            <i nz-icon nzType="profile" nzTheme="outline"></i><span class="list-number">0</span>
-            <div class="m-vol" *ngIf="soundHide">
-              <div class="barbg" id="soundBtn"></div>
-              <div class="vbg" id="vbg"><div class="curr" style="height: 100%;" (click)="volume($event)" id="curVolume"></div>
-              <span class="btn f-alpha"></span></div>
+            <i nz-icon nzType="profile" nzTheme="outline" (click)="showDetail()"></i><span class="list-number">{{ listOfData && listOfData['length']}}</span>
+              <div class="m-vol" *ngIf="soundHide">
+                <div class="barbg"></div>
+                  <div class="vbg" id="vbg" (click)="volume($event)">
+                    <div class="curr" style="height: 100%;" id="curVolume">
+                      <span class="btn f-alpha"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="play-detail" *ngIf="detailHide">
+                <div class="play-header">播放列表({{listOfData && listOfData['length']}})
+                    <span class="clear"><i nz-icon nzType="delete" nzTheme="outline"></i>&nbsp;清除</span>
+                </div>
+                <div class="detail-list">
+                  <ul class="overflow">
+                    <li *ngFor="let data of listOfData;let i = index"><span>{{i}}-{{ data && data['name']}}</span> <span class="mar">{{ data && data['ar'] && data['ar'][0].name}}</span></li>
+                  </ul>
+                </div>
               </div>
            </div>
          </div>

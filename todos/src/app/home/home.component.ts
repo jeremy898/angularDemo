@@ -18,7 +18,6 @@ import { UtilsService } from "../utils.service";
 })
 export class HomeComponent implements OnInit {
   @ViewChild("audio") audio: ElementRef;
-  // @ViewChild('play') playbox: ElementRef;
   constructor(
     private http: HttpClient,
     private util: UtilsService,
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit {
   isShow = true;
   playView = {};
   ngOnInit() {
-    const _this = this;
     this.playState = false;
     this.soundHide = false;
     this.http.get("http://47.105.150.105/m-api/banner").subscribe(res => {  
@@ -42,6 +40,7 @@ export class HomeComponent implements OnInit {
       this.isShow = false;
     }
     this.route.queryParams.subscribe(res => {
+      console.log(res)
       this.audio.nativeElement.src =
         "https://music.163.com/song/media/outer/url?id=" + res.songId + ".mp3";
       this.audio.nativeElement.load();
@@ -54,9 +53,9 @@ export class HomeComponent implements OnInit {
           })
           .catch(() => {});
       }
-
       let id = this.route.children[0].snapshot && this.route.children[0].snapshot.params.id || 2859214503;
       this.http.get("http://47.105.150.105/m-api/playlist/detail?id=" + id).subscribe(result => {
+          this.listOfData = result['playlist']['tracks']
           this.playView = result["playlist"]["tracks"].find(item => {
             return item.id == res.songId;
           });
@@ -64,6 +63,7 @@ export class HomeComponent implements OnInit {
         if(res.hasOwnProperty('id')){
             let id = res.id
             this.http.get('http://47.105.150.105/m-api/artists?id='+ id).subscribe(result => {
+              this.listOfData = result['hotSongs']
                this.playView = result["hotSongs"].find(item => {
                 return item.id == res.songId;
               })
@@ -81,6 +81,8 @@ export class HomeComponent implements OnInit {
   playState = false
   soundHide = false;
   testSwiper: Swiper;
+  detailHide = true;
+  listOfData
   slides = [];
   backgroundcolor: [];
   disabled = false; 
@@ -98,7 +100,6 @@ export class HomeComponent implements OnInit {
     }
   }
   move(e) {
-    console.log(this.playView)
     let process = document.getElementsByClassName("son")[0];
     let offset = document.getElementsByClassName("process")[0];
     let rect = document.getElementsByClassName("process")[0].getBoundingClientRect();
@@ -120,17 +121,15 @@ export class HomeComponent implements OnInit {
   }
   changeSound(){
     this.soundHide = !this.soundHide
-    // this.audio.nativeElement.volume
+  }
+  showDetail(){
+    this.detailHide = !this.detailHide
   }
   volume(e){
     let vbg = document.getElementById('vbg')
-    // let soundContorl = document.getElementById('soundBtn')
-    let Volume = document.getElementById('curVolume')
-    console.log(vbg.getBoundingClientRect().top)
-    console.log(e.clientY)
-    console.log('---')
-    // let curVolume = e.clientY - vbg.getBoundingClientRect().top
-    // console.log(curVolume)
-    // Volume.setAttribute("style", `height: ${curVolume}px`);
+    let Volume = document.getElementById('curVolume') 
+    let curVolume = vbg.getBoundingClientRect().bottom - e.clientY 
+    Volume.setAttribute("style", `height: ${curVolume}px`)
+    this.audio.nativeElement.volume = Math.floor(curVolume / vbg.clientHeight * 100 )/100
   }
 }
