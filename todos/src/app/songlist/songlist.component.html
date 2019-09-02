@@ -13,16 +13,16 @@
       </div>
     </div>
     <div class="user">
-      <a class="face" href="/user/home?id=402524626"><img
-          src="http://p1.music.126.net/pfJqtzBjaQyl58AlRb9-Ow==/109951164184069956.jpg?param=40y40"></a>
+      <a class="face" href="/user/home?id=402524626"><img style="width: 40px;height: 40px;"
+          [src]="playlist && playlist['creator'] && playlist['creator'].avatarUrl"></a>
       <span class="name">
-        <a href="/user/home?id=402524626" class="s-fc7" style="margin: 0 6px">空气很颓废</a>
+        <a href="/user/home?id=402524626" class="s-fc7" style="margin: 0 6px">{{playlist && playlist['creator'] && playlist['creator'].nickname}}</a>
       </span>
       <i nz-icon nzType="star" nzTheme="outline" style="color: rgba(206, 61, 62);"></i>
-      <span class="time s-fc4" style="margin-left:5px;">2019-05-29&nbsp;创建</span>
+      <span class="time s-fc4" style="margin-left:5px;">{{playlist && playlist['createTime'] | date}}&nbsp;创建</span>
     </div>
     <div class="button">
-      <button nz-button nzType="primary"><i nz-icon nzType="right-circle" nzTheme="outline"></i>播放</button>
+      <button nz-button nzType="primary"><i nz-icon nzType="right-circle" nzTheme="outline"></i>播放</button> 
       <button nz-button nzType="default"><i nz-icon nzType="file-zip" nzTheme="outline"></i>({{playlist && playlist['subscribedCount']}})</button>
       <button nz-button nzType="default"><i nz-icon nzType="branches" nzTheme="outline"></i>({{playlist && playlist['shareCount']}})</button>
       <button nz-button nzType="default"><i nz-icon nzType="download" nzTheme="outline"></i>下载</button>

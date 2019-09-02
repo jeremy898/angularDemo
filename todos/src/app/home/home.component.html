@@ -64,7 +64,7 @@
            </div>
            <div class="sound">
             <i nz-icon nzType="sound" nzTheme="outline" style="margin-right:10px;" (click)="changeSound()"></i>
-            <i nz-icon nzType="profile" nzTheme="outline" (click)="showDetail()"></i><span class="list-number">{{ listOfData && listOfData['length']}}</span>
+            <i nz-icon nzType="profile" nzTheme="outline" (click)="showDetail()"></i><span class="list-number">{{ listOfData && listOfData['length'] || 0}}</span>
               <div class="m-vol" *ngIf="soundHide">
                 <div class="barbg"></div>
                   <div class="vbg" id="vbg" (click)="volume($event)">
@@ -74,12 +74,12 @@
                 </div>
               </div>
               <div class="play-detail" *ngIf="detailHide">
-                <div class="play-header">播放列表({{listOfData && listOfData['length']}})
+                <div class="play-header">播放列表({{listOfData && listOfData['length'] || 0}})
                     <span class="clear"><i nz-icon nzType="delete" nzTheme="outline"></i>&nbsp;清除</span>
                 </div>
                 <div class="detail-list">
                   <ul class="overflow">
-                    <li *ngFor="let data of listOfData;let i = index"><span>{{i}}-{{ data && data['name']}}</span> <span class="mar">{{ data && data['ar'] && data['ar'][0].name}}</span></li>
+                    <li *ngFor="let data of listOfData;let i = index"><span *ngIf="currentId == data.id" style="position: absolute;left: 5px;"><i nz-icon style="color: red" nzType="caret-right" nzTheme="outline"></i></span><span>{{i + 1}}-{{ data && data['name']}}</span> <span class="mar">{{ data && data['ar'] && data['ar'][0].name}}</span></li>
                   </ul>
                 </div>
               </div>

@@ -8,6 +8,7 @@ import { HttpClient } from "@angular/common/http";
 export class SingerComponent implements OnInit {
   constructor(private http: HttpClient) {}
   isSelected:number;
+  isWord:number;
   singerList: [];
   typeList =[
     {
@@ -71,6 +72,9 @@ export class SingerComponent implements OnInit {
       id:4001
     }
   ];
+  wordList = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+  word = ''
+  singer = ''
   ngOnInit() {
     this.http
       .get("http://47.105.150.105/m-api/top/artists?offset=0")
@@ -78,9 +82,15 @@ export class SingerComponent implements OnInit {
         this.singerList = res["artists"];
       });
   }
-  search(i,id){
-    this.isSelected = i
-    this.http.get('http://47.105.150.105/m-api/artist/list?cat='+ id +'&initial=&offset=0').subscribe(result =>{
+  search(type,i,id){
+    if(type === 'singer'){
+      this.isSelected = i
+      this.singer = id
+    }else{
+      this.isWord = i
+      this.word = id.toLocaleLowerCase()
+    }
+    this.http.get('http://47.105.150.105/m-api/artist/list?cat='+ this.singer +'&initial='+ this.word +'&offset=0').subscribe(result =>{
       this.singerList = result['artists']
     })
   }

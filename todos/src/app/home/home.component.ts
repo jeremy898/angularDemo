@@ -27,8 +27,7 @@ export class HomeComponent implements OnInit {
   isShow = true;
   playView = {};
   ngOnInit() {
-    this.playState = false;
-    this.soundHide = false;
+    this.init()
     this.http.get("http://47.105.150.105/m-api/banner").subscribe(res => {  
       if(res['code'] !== 200){
         this.util.message('请求失败,请联系管理员', false, 3000);
@@ -40,7 +39,7 @@ export class HomeComponent implements OnInit {
       this.isShow = false;
     }
     this.route.queryParams.subscribe(res => {
-      console.log(res)
+      this.currentId = res.songId
       this.audio.nativeElement.src =
         "https://music.163.com/song/media/outer/url?id=" + res.songId + ".mp3";
       this.audio.nativeElement.load();
@@ -53,7 +52,7 @@ export class HomeComponent implements OnInit {
           })
           .catch(() => {});
       }
-      let id = this.route.children[0].snapshot && this.route.children[0].snapshot.params.id || 2859214503;
+      let id = this.route.children && this.route.children[0].snapshot && this.route.children[0].snapshot.params.id || 2859214503;
       this.http.get("http://47.105.150.105/m-api/playlist/detail?id=" + id).subscribe(result => {
           this.listOfData = result['playlist']['tracks']
           this.playView = result["playlist"]["tracks"].find(item => {
@@ -82,6 +81,7 @@ export class HomeComponent implements OnInit {
   soundHide = false;
   testSwiper: Swiper;
   detailHide = true;
+  currentId:number
   listOfData
   slides = [];
   backgroundcolor: [];
@@ -91,7 +91,10 @@ export class HomeComponent implements OnInit {
   change(e) {
     // console.log(e)
   }
-  init() {}
+  init() {
+    this.soundHide = false
+    this.detailHide = false
+  }
   showSwiper(e) {
     if (e.target.innerHTML === "我的音乐") {
       this.isShow = false;
