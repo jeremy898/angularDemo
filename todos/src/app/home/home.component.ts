@@ -18,6 +18,7 @@ import { UtilsService } from "../utils.service";
 })
 export class HomeComponent implements OnInit {
   @ViewChild("audio") audio: ElementRef;
+  @ViewChild("search") search: ElementRef;
   constructor(
     private http: HttpClient,
     private util: UtilsService,
@@ -52,7 +53,7 @@ export class HomeComponent implements OnInit {
           })
           .catch(() => {});
       }
-      let id = this.route.children && this.route.children[0].snapshot && this.route.children[0].snapshot.params.id || 2859214503;
+      let id = this.route.children && this.route.children[0] && this.route.children[0].snapshot && this.route.children[0].snapshot.params.id || 2859214503;
       this.http.get("http://47.105.150.105/m-api/playlist/detail?id=" + id).subscribe(result => {
           this.listOfData = result['playlist']['tracks']
           this.playView = result["playlist"]["tracks"].find(item => {
@@ -82,10 +83,14 @@ export class HomeComponent implements OnInit {
   testSwiper: Swiper;
   detailHide = true;
   currentId:number
-  listOfData
+  listOfData;
+  songs;
   slides = [];
   backgroundcolor: [];
-  disabled = false; 
+  disabled = false;
+  showSearch =false;
+  playlists;
+  artists;
   value1 = 30;
   value2 = [20, 50];
   change(e) {
@@ -103,6 +108,11 @@ export class HomeComponent implements OnInit {
     }
   }
   move(e) {
+    if (this.audio.nativeElement.paused) {
+      if(!this.audio.nativeElement.duration){
+        return
+      }
+  } 
     let process = document.getElementsByClassName("son")[0];
     let offset = document.getElementsByClassName("process")[0];
     let rect = document.getElementsByClassName("process")[0].getBoundingClientRect();
@@ -134,5 +144,53 @@ export class HomeComponent implements OnInit {
     let curVolume = vbg.getBoundingClientRect().bottom - e.clientY 
     Volume.setAttribute("style", `height: ${curVolume}px`)
     this.audio.nativeElement.volume = Math.floor(curVolume / vbg.clientHeight * 100 )/100
+  }
+  searchKey(e){
+    let keywords = this.search.nativeElement.value
+    if(keywords === ''){
+      return
+    }
+    this.http.get('http://47.105.150.105/m-api/search/suggest?keywords='+keywords).subscribe(res => {
+      this.artists = res['result'] && res['result']['artists']
+      this.playlists = res['result'] && res['result']['playlists']
+    })
+    this.http.get('http://47.105.150.105/m-api/search?keywords='+keywords).subscribe(res => {
+      this.songs = res['result']['songs']
+    })
+  }
+  config(){
+    this.showSearch = false
+    this.artists = []
+    this.playlists= []
+    this.songs = []
+    this.search.nativeElement.value = ''
+  }
+  show(e){
+    e.stopPropagation()
+    this.showSearch = true;
+  }
+  playsong(song){
+    let id = song.id
+    this.playView = {
+      'name':song.name,
+      'ar':[{
+        'name':song.artists && song.artists[0]['name']
+      }],
+      'al':{
+        'picUrl':song.artists && song.artists[0]['img1v1Url']
+      }
+    }
+    this.audio.nativeElement.src =
+        "https://music.163.com/song/media/outer/url?id=" + id + ".mp3";
+      this.audio.nativeElement.load();
+      let playPromise = this.audio.nativeElement.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            this.audio.nativeElement.play();
+            this.playState = true
+          })
+          .catch(() => {});
+      }
   }
 }

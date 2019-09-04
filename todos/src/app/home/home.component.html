@@ -1,4 +1,4 @@
-<nz-layout>
+<nz-layout (click)="config()">
   <nz-header>
     <div class="logo"></div>
     <div class="tabs-list">
@@ -11,12 +11,28 @@
       </ul>
     </div>
     <div class="seachbar">
-      <nz-input-group [nzSuffix]="suffixIconSearch">
-        <input type="text" nz-input placeholder="音乐/视频/电台/用户" />
+      <nz-input-group [nzSuffix]="suffixIconSearch" >
+        <input type="text" nz-input #search placeholder="音乐/视频/电台/用户" (keyup)="searchKey($event)" (keyup)="show($event)"/>
       </nz-input-group>
       <ng-template #suffixIconSearch>
         <i nz-icon nzType="search"></i>
       </ng-template>
+      <div class="searchbox" *ngIf='showSearch'>
+        <p>相关歌手</p> 
+        <ul>
+          <li *ngFor="let item of artists"><a href="javascript:;" [routerLink]="['/home/artist']"  [queryParams]="{id:item.id}"><img [src]="item.picUrl" alt="" style="width: 30px;height: 30px;margin-right: 20px;">歌手:{{item.name}}</a></li>
+        </ul>
+        <p>相关歌单</p>
+        <ul>
+          <li *ngFor="let song of playlists"><a href="javascript:;" [routerLink]="['/home/singlist/'+ song.id]"><img [src]="song.coverImgUrl" alt="" style="width: 30px;height: 30px;margin-right: 20px;">歌单:{{song.name}}</a></li>
+        </ul>
+        <div>
+          <p>歌曲</p>
+        <ul>
+          <li *ngFor="let sing of songs" (click)="playsong(sing)"><a href="javascript:;">{{sing.name}}--{{sing.album && sing.album['name']}}<span></span> </a></li>
+        </ul>
+        </div>
+      </div>
     </div>
     <div class="login">
       <a href="#" style="color:#787878;margin-right: 4px">登录</a>
@@ -53,7 +69,7 @@
            </div>
            <div class="cdbox" style="display: block;">
               <div class="title" style="text-align: left;padding: 0 2px 10px;position: relative;">
-                  {{playView && playView['name'] || 'weibofang'}}<i nz-icon nzType="paper-clip" nzTheme="outline" style="margin: 0 5px;"></i><span style="color: #9b9b9b;">{{playView && playView['ar'] && playView['ar'][0].name}}</span>
+                  {{playView && playView['name'] || '未播放'}}<i nz-icon nzType="paper-clip" nzTheme="outline" style="margin: 0 5px;"></i><span style="color: #9b9b9b;">{{playView && playView['ar'] && playView['ar'][0].name}}</span>
                   <span style="position: absolute;right: 0;">{{this.audio.currentTime | timeformat}}/{{this.audio.duration | timeformat }}</span>
                  </div>
                  <div class="process" (click)="move($event)">
