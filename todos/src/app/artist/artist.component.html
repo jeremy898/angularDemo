@@ -46,7 +46,7 @@
                   <td [class.td]="i%2 == 0">{{i+1}}&nbsp;<a href="javascript:;"><i nz-icon nzType="right-circle" nzTheme="outline" (click)="play(data)"></i></a></td>
                 <td class='td'[class.td]="i%2 == 0">{{data.name}}</td>
                 <td [class.td]="i%2 == 0">
-                  <a>Action 一 {{data.ar[0].name}}</a>
+                  <a>{{data.ar[0].name}}</a>
                   <nz-divider nzType="vertical"></nz-divider>
                 </td>
                 <td [class.td]="i%2 == 0">{{data.al.name}}</td>

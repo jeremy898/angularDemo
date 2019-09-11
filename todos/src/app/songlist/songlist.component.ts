@@ -11,10 +11,8 @@ export class SonglistComponent implements OnInit {
   playlist : {};
   listOfData = [];
   ngOnInit() {
-    // console.log(this.route.snapshot.params.id)
     let id = this.route.snapshot.params.id
     this.http.get('http://47.105.150.105/m-api/playlist/detail?id='+id).subscribe(res =>{
-      // console.log(res)
       this.playlist = res['playlist']
       this.listOfData = res['playlist']['tracks']
     })

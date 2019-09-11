@@ -99,9 +99,17 @@
                   </ul>
                 </div>
               </div>
+              <div class="play-lyric" *ngIf="detailHide" #lyric>
+                <ng-container *ngIf="lyricList.length > 0;else other">
+                  <p *ngFor="let lyric of lyricList;let i =index" [ngClass]="audio.currentTime+3 > lyric.timepoint && audio.currentTime  < lyric.timepoint ? 'line' : '' ">{{lyric['lrcstr']}}</p>
+              </ng-container>
+              <ng-template #other>
+                  暂无歌词
+              </ng-template>
+              </div>
            </div>
          </div>
-         <audio controls="controls" style="display: none;" #audio></audio>
+         <audio controls="controls" (timeupdate)="scroll()" style="display: none;" #audio></audio>
       </div>
     </div>
   </nz-footer>

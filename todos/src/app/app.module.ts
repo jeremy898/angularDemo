@@ -19,7 +19,8 @@ import { SingerComponent } from './singer/singer.component';
 import { SonglistComponent } from './songlist/songlist.component';
 import { ArtistComponent } from './artist/artist.component';
 import { SingComponent } from './singer/sing/sing.component';
-import { TimeformatPipe } from './timeformat.pipe'
+import { TimeformatPipe } from './timeformat.pipe';
+import { SplitPipe } from './split.pipe'
  
 
 //配置路由规则
@@ -59,6 +60,7 @@ const appRoutes : Routes = [
     ArtistComponent,
     SingComponent,
     TimeformatPipe,
+    SplitPipe,
   ],
   imports: [
     BrowserModule,

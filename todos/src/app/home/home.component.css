@@ -219,7 +219,7 @@
 .play-detail{
   position: absolute;
   top: -270px;
-  left: -566px; 
+  left: -710px; 
   width: 558px;
   height: 260px;
   background-color: rgba(40, 40, 40,.9);
@@ -279,4 +279,24 @@
 }
 .searchbox a {
   color: #fff;
+}
+.play-lyric{
+  position: absolute;
+  top: -270px;
+  left: -152px; 
+  width: 358px;
+  height: 260px;
+  background-color: rgba(40, 40, 40,.9);
+  line-height: 2em;
+  font-size: 12px;
+  color: #989898;
+  word-break: break-all;
+  white-space:pre-line;
+  overflow: hidden;
+  overflow-x:hidden; 
+  overflow-y:scroll;
+}
+.line{
+  font-size: 14px;
+  color: #FFF;
 }

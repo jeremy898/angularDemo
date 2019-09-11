@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ActivatedRoute, Router } from "@angular/router";
-import Swiper from "swiper";
 import { UtilsService } from "../utils.service";
 
 @Component({
@@ -19,15 +18,31 @@ import { UtilsService } from "../utils.service";
 export class HomeComponent implements OnInit {
   @ViewChild("audio") audio: ElementRef;
   @ViewChild("search") search: ElementRef;
+  @ViewChild("lyric") lyric: ElementRef;
   constructor(
     private http: HttpClient,
     private util: UtilsService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-  isShow = true;
-  playView = {};
+    ) {}
+    playState = false;
+    soundHide = false;
+    detailHide = true;
+    currentId: number;
+    listOfData;
+    songs;
+    slides = [];
+    backgroundcolor: [];
+    disabled = false;
+    showSearch = false;
+    playlists;
+    artists;
+    currentIndex;
+    isShow = true;
+    playView = {};
+    lyricList =[]
   ngOnInit() {
+    //页面初始加载
     this.init();
     this.http.get("http://47.105.150.105/m-api/banner").subscribe(res => {
       if (res["code"] !== 200) {
@@ -36,11 +51,14 @@ export class HomeComponent implements OnInit {
         this.slides = res && res["banners"];
       }
     });
+    //切换至我的音乐tab
     if (this.router.url.includes("singlist")) {
       this.isShow = false;
     }
+    //监听路由获取歌单id及歌曲id请求资源
     this.route.queryParams.subscribe(res => {
       this.currentId = res.songId;
+      this.getlyric(res.songId)
       this.audio.nativeElement.src =
         "https://music.163.com/song/media/outer/url?id=" + res.songId + ".mp3";
       this.audio.nativeElement.load();
@@ -53,12 +71,12 @@ export class HomeComponent implements OnInit {
           })
           .catch(() => {});
       }
+      //获取歌单id请求歌单列表及播放信息
       let id =
         (this.route.children &&
           this.route.children[0] &&
           this.route.children[0].snapshot &&
-          this.route.children[0].snapshot.params.id) ||
-        2859214503;
+          this.route.children[0].snapshot.params.id) || 2859214503;
       this.http
         .get("http://47.105.150.105/m-api/playlist/detail?id=" + id)
         .subscribe(result => {
@@ -67,6 +85,7 @@ export class HomeComponent implements OnInit {
             return item.id == res.songId;
           });
         });
+        //判断歌手id请求歌手歌单详情
       if (res.hasOwnProperty("id")) {
         let id = res.id;
         this.http
@@ -79,28 +98,14 @@ export class HomeComponent implements OnInit {
           });
       }
     });
+    //调整进度条
     this.audio.nativeElement.ontimeupdate = function() {
-      let process = document.getElementsByClassName("son")[0];
-      // console.log('播放中')
+      let process = document.getElementsByClassName("son")[0]
       // 视频当前时间 / 视频总时长 变成百分比
       let perWidth = (this.currentTime / this.duration) * 100 + "%";
       process.setAttribute("style", `width: ${perWidth}`);
     };
   }
-  playState = false;
-  soundHide = false;
-  testSwiper: Swiper;
-  detailHide = true;
-  currentId: number;
-  listOfData;
-  songs;
-  slides = [];
-  backgroundcolor: [];
-  disabled = false;
-  showSearch = false;
-  playlists;
-  artists;
-  currentIndex;
   change(e) {
     // console.log(e)
   }
@@ -115,6 +120,7 @@ export class HomeComponent implements OnInit {
       this.isShow = true;
     }
   }
+  //调整歌曲播放时长
   move(e) {
     if (this.audio.nativeElement.paused) {
       if (!this.audio.nativeElement.duration) {
@@ -132,6 +138,7 @@ export class HomeComponent implements OnInit {
     this.audio.nativeElement.currentTime =
       (marWidth / offset["offsetWidth"]) * this.audio.nativeElement.duration;
   }
+  //切换播放状态
   paused(e) {
     e.stopPropagation();
     if (this.playState) {
@@ -148,6 +155,7 @@ export class HomeComponent implements OnInit {
   showDetail() {
     this.detailHide = !this.detailHide;
   }
+  //调节音量
   volume(e) {
     let vbg = document.getElementById("vbg");
     let Volume = document.getElementById("curVolume");
@@ -156,6 +164,7 @@ export class HomeComponent implements OnInit {
     this.audio.nativeElement.volume =
       Math.floor((curVolume / vbg.clientHeight) * 100) / 100;
   }
+  //搜索歌曲
   searchKey(e) {
     let keywords = this.search.nativeElement.value;
     if (keywords === "") {
@@ -184,6 +193,7 @@ export class HomeComponent implements OnInit {
     e.stopPropagation();
     this.showSearch = true;
   }
+  //播放搜索歌曲
   playsong(song) {
     let id = song.id;
     this.playView = {
@@ -209,8 +219,9 @@ export class HomeComponent implements OnInit {
         })
         .catch(() => {});
     }
+    this.getlyric(id)
   }
-  
+  //切歌
   next(type) {
     let id
     this.currentId = this.playView && this.playView["id"];
@@ -246,6 +257,67 @@ export class HomeComponent implements OnInit {
           this.playState = true;
         })
         .catch(() => {});
+    }
+  }
+  getlyric(id){
+    if(!id){
+      return
+    }
+    this.http.get('http://47.105.150.105/m-api/lyric?id='+ id).subscribe(res => {
+      if(!res){
+        this.util.message('加载歌词有误')
+      }
+      this.lyricList = formatLyric(res['lrc']['lyric'])
+      function formatLyricTime(str) {
+        var arr=str.split(":");
+        var second=0;
+        if (arr.length==3) {
+          second=-(-arr[0]*3600-arr[1]*60-arr[2]);
+        } else {
+          second=-(-arr[0]*60-arr[1]);
+        }
+        return second.toFixed(3);
+      }
+      function formatLyric(str) {
+        var arr=[],
+          brr=[],
+          crr=[],
+          data={};
+      
+        // 将字符串按“\n” 分割成数组
+        arr=str.split("\n");
+        // 去除最后一个空格
+        arr.splice(-1,1);
+        // 存入crr数组中
+        for (var i=0;i<arr.length;i++) {
+          // 将字符串按“]” 分割成数组
+          brr=arr[i].split("]");
+          // 匹配歌词时间，排除歌词附加信息 eg: "by:Treckiefans"
+          // /^(\d+:){1,2}\d+\.?\d+$/g  match 00:02 || 00:00:03 || 00:00:05.2
+          if (!!/^(\d+:){1,2}\d+\.?\d+$/g.test(brr[0].substring(1))) {
+            data={
+              "timepoint":formatLyricTime(brr[0].substring(1)),
+              "lrcstr":brr[1] || ''
+            };
+            // 将所有键值对放入数组中
+            crr.push(data);
+          } else {
+            // 歌词贡献者信息，暂不处理 "by:Treckiefans"
+          }
+        }
+        return crr;
+      }
+      console.log(this.lyricList)
+      console.log(this.audio)
+    })
+  }
+  scroll(){
+    if(this.lyric){
+      this.lyricList.forEach(item => {
+        if(item.timepoint < this.audio.nativeElement.currentTime + 3 && this.audio.nativeElement.currentTime < item.timepoint){
+          this.lyric.nativeElement.scrollTop += 3.5
+        }
+      })
     }
   }
 }
