@@ -94,14 +94,22 @@
                     <span class="clear"><i nz-icon nzType="delete" nzTheme="outline"></i>&nbsp;清除</span>
                 </div>
                 <div class="detail-list">
-                  <ul class="overflow">
-                    <li *ngFor="let data of listOfData;let i = index"><span *ngIf="currentId == data.id" style="position: absolute;left: 5px;"><i nz-icon style="color: red" nzType="caret-right" nzTheme="outline"></i></span><span>{{i + 1}}-{{ data && data['name']}}</span> <span class="mar">{{ data && data['ar'] && data['ar'][0].name}}</span></li>
-                  </ul>
+                    <ng-container *ngIf="listOfData.length > 0;else other">
+                      <ul class="overflow">
+                        <li *ngFor="let data of listOfData;let i = index"><span *ngIf="currentId == data.id" style="position: absolute;left: 5px;"><i nz-icon style="color: red" nzType="caret-right" nzTheme="outline"></i></span><span>{{i + 1}}-{{ data && data['name']}}</span> <span class="mar">{{ data && data['ar'] && data['ar'][0].name}}</span></li>
+                      </ul>
+                    </ng-container>
+                    <ng-template #other>
+                        <p style="line-height: 2em;
+                        font-size: 16px;
+                        color: #989898;
+                        text-align: center">播放列表为空</p>
+                    </ng-template>
                 </div>
               </div>
-              <div class="play-lyric" *ngIf="detailHide" #lyric>
-                <ng-container *ngIf="lyricList.length > 0;else other">
-                  <p *ngFor="let lyric of lyricList;let i =index" [ngClass]="audio.currentTime+3 > lyric.timepoint && audio.currentTime  < lyric.timepoint ? 'line' : '' ">{{lyric['lrcstr']}}</p>
+              <div class="play-lyric" *ngIf="detailHide" #lyric  id="ly">
+                <ng-container *ngIf="lyricList.length > 0;else other" #curlyric>
+                  <p *ngFor="let lyric of lyricList;let i =index" [ngClass]="audio.currentTime + 3 > lyric.timepoint && audio.currentTime  < lyric.timepoint ? 'line' : '' ">{{lyric['lrcstr']}}</p>
               </ng-container>
               <ng-template #other>
                   暂无歌词

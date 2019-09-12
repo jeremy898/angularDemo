@@ -11,7 +11,6 @@ export class RanklistComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('http://47.105.150.105/m-api/toplist/detail').subscribe(res => {
-      console.log(res)
       this.rankList = res['list']
     })
   }

@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("audio") audio: ElementRef;
   @ViewChild("search") search: ElementRef;
   @ViewChild("lyric") lyric: ElementRef;
+  @ViewChild("curlyric") curlyric: ElementRef;
   constructor(
     private http: HttpClient,
     private util: UtilsService,
@@ -29,7 +30,7 @@ export class HomeComponent implements OnInit {
     soundHide = false;
     detailHide = true;
     currentId: number;
-    listOfData;
+    listOfData = [];
     songs;
     slides = [];
     backgroundcolor: [];
@@ -76,8 +77,9 @@ export class HomeComponent implements OnInit {
         (this.route.children &&
           this.route.children[0] &&
           this.route.children[0].snapshot &&
-          this.route.children[0].snapshot.params.id) || 2859214503;
-      this.http
+          this.route.children[0].snapshot.params.id) || '';
+      if(id){
+        this.http
         .get("http://47.105.150.105/m-api/playlist/detail?id=" + id)
         .subscribe(result => {
           this.listOfData = result["playlist"]["tracks"];
@@ -85,6 +87,7 @@ export class HomeComponent implements OnInit {
             return item.id == res.songId;
           });
         });
+      }
         //判断歌手id请求歌手歌单详情
       if (res.hasOwnProperty("id")) {
         let id = res.id;
@@ -228,7 +231,6 @@ export class HomeComponent implements OnInit {
     this.currentIndex = this.listOfData.findIndex((item, index) => {
       return item.id == this.currentId;
     });
-    // console.log(this.currentId,this.currentSong)
     if(type === 'next'){
       if (this.currentIndex < this.listOfData.length - 1) {
         id = this.listOfData[this.currentIndex + 1]['id']
@@ -280,10 +282,9 @@ export class HomeComponent implements OnInit {
       }
       function formatLyric(str) {
         var arr=[],
-          brr=[],
-          crr=[],
-          data={};
-      
+            brr=[],
+            crr=[],
+            data={};
         // 将字符串按“\n” 分割成数组
         arr=str.split("\n");
         // 去除最后一个空格
@@ -307,17 +308,19 @@ export class HomeComponent implements OnInit {
         }
         return crr;
       }
-      console.log(this.lyricList)
-      console.log(this.audio)
     })
   }
   scroll(){
     if(this.lyric){
       this.lyricList.forEach(item => {
-        if(item.timepoint < this.audio.nativeElement.currentTime + 3 && this.audio.nativeElement.currentTime < item.timepoint){
+        if(item.timepoint < this.audio.nativeElement.currentTime + 2 && this.audio.nativeElement.currentTime < item.timepoint){
           this.lyric.nativeElement.scrollTop += 3.5
         }
       })
+      // let ly = document.getElementById('ly')
+      // console.log(ly.childNodes.forEach(item => {
+      //   console.log(item)
+      // }))
     }
   }
 }
