@@ -317,10 +317,6 @@ export class HomeComponent implements OnInit {
           this.lyric.nativeElement.scrollTop += 3.5
         }
       })
-      // let ly = document.getElementById('ly')
-      // console.log(ly.childNodes.forEach(item => {
-      //   console.log(item)
-      // }))
     }
   }
 }
