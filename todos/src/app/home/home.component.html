@@ -109,7 +109,7 @@
               </div>
               <div class="play-lyric" *ngIf="detailHide" #lyric  id="ly">
                 <ng-container *ngIf="lyricList.length > 0;else other" #curlyric>
-                  <p *ngFor="let lyric of lyricList;let i =index" [ngClass]="audio.currentTime + 3 > lyric.timepoint && audio.currentTime  < lyric.timepoint ? 'line' : '' ">{{lyric['lrcstr']}}</p>
+                  <p *ngFor="let lyric of lyricList;let i =index" [ngClass]="audio.currentTime + 2 > lyric.timepoint && audio.currentTime  < lyric.timepoint ? 'line' : '' ">{{lyric['lrcstr']}}</p>
               </ng-container>
               <ng-template #other>
                   暂无歌词

@@ -313,6 +313,7 @@ export class HomeComponent implements OnInit {
   scroll(){
     if(this.lyric){
       this.lyricList.forEach(item => {
+        console.log(this.audio.nativeElement.currentTime == item.timepoint)
         if(item.timepoint < this.audio.nativeElement.currentTime + 2 && this.audio.nativeElement.currentTime < item.timepoint){
           this.lyric.nativeElement.scrollTop += 3.5
         }
