@@ -152,10 +152,12 @@ export class HomeComponent implements OnInit {
       this.playState = true;
     }
   }
-  changeSound() {
+  changeSound(e) {
+    e.stopPropagation();
     this.soundHide = !this.soundHide;
   }
-  showDetail() {
+  showDetail(e) {
+    e.stopPropagation();
     this.detailHide = !this.detailHide;
   }
   //调节音量
@@ -191,6 +193,8 @@ export class HomeComponent implements OnInit {
     this.playlists = [];
     this.songs = [];
     this.search.nativeElement.value = "";
+    this.detailHide = false
+    this.soundHide = false
   }
   show(e) {
     e.stopPropagation();
@@ -314,7 +318,7 @@ export class HomeComponent implements OnInit {
     if(this.lyric){
       this.lyricList.forEach(item => {
         if(item.timepoint < this.audio.nativeElement.currentTime + 2 && this.audio.nativeElement.currentTime < item.timepoint){
-          this.lyric.nativeElement.scrollTop += 3.5
+          this.lyric.nativeElement.scrollTop += 4.5
         }
       })
     }

@@ -79,8 +79,8 @@
                  </div>
            </div>
            <div class="sound">
-            <i nz-icon nzType="sound" nzTheme="outline" style="margin-right:10px;" (click)="changeSound()"></i>
-            <i nz-icon nzType="profile" nzTheme="outline" (click)="showDetail()"></i><span class="list-number">{{ listOfData && listOfData['length'] || 0}}</span>
+            <i nz-icon nzType="sound" nzTheme="outline" style="margin-right:10px;" (click)="changeSound($event)"></i>
+            <i nz-icon nzType="profile" nzTheme="outline" (click)="showDetail($event)"></i><span class="list-number">{{ listOfData && listOfData['length'] || 0}}</span>
               <div class="m-vol" *ngIf="soundHide">
                 <div class="barbg"></div>
                   <div class="vbg" id="vbg" (click)="volume($event)">
