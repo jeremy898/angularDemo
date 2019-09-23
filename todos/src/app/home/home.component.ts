@@ -306,8 +306,6 @@ export class HomeComponent implements OnInit {
             };
             // 将所有键值对放入数组中
             crr.push(data);
-          } else {
-            // 歌词贡献者信息，暂不处理 "by:Treckiefans"
           }
         }
         return crr;
