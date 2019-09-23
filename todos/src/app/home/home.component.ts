@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
     playView = {};
     lyricList =[]
   ngOnInit() {
-    //页面初始加载
     this.init();
     this.http.get("http://47.105.150.105/m-api/banner").subscribe(res => {
       if (res["code"] !== 200) {
