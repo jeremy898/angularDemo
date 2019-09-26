@@ -11,7 +11,7 @@ export class StoreComponent implements OnInit {
   constructor( 
     private util: UtilsService
     ) { }
-  dayline : number = 3600
+  dayline : number = (60 - new Date().getMinutes())*60
   currentime = new Date().getHours()
   // isOver:boolean = true
   roundList = [
