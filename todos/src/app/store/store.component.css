@@ -1,0 +1,58 @@
+:host {
+    color: #fff;
+    font-size: 16px;
+}
+
+#times_container {
+    border: 1px;
+    border-color: #999999;
+    border-style: solid;
+    background: #333333;
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    font-size: 24px
+}
+
+.grid{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;    
+}
+.timeline-list{
+    width: 100%;
+    height: 60px;
+    padding: 0;
+}
+.timeline-list>li{
+    list-style: none;
+    float: left;
+    line-height: 2em;
+    text-align: center;
+    font-size: 14px;
+    width: 24%;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+.active{
+    background-color: red;
+    height: 100%;
+    display: flex;
+}
+.time{
+    font-weight: bold;
+    font-size: 20px;
+}
+.time_count{
+    margin-left: 20px;
+}
+p{
+    padding: 0;
+    margin: 0;
+}
+.over{
+    background-color: gray;
+    height: 100%;
+    display: flex;
+}

@@ -20,7 +20,8 @@ import { SonglistComponent } from './songlist/songlist.component';
 import { ArtistComponent } from './artist/artist.component';
 import { SingComponent } from './singer/sing/sing.component';
 import { TimeformatPipe } from './timeformat.pipe';
-import { SplitPipe } from './split.pipe'
+import { SplitPipe } from './split.pipe';
+import { StoreComponent } from './store/store.component'
  
 
 //配置路由规则
@@ -35,11 +36,12 @@ const appRoutes : Routes = [
       {path: 'singer', component:SingerComponent},
       {path: 'singlist',component:SonglistComponent},
       {path: 'singlist/:id',component:SonglistComponent},
-      {path: 'artist',component:ArtistComponent}
+      {path: 'artist',component:ArtistComponent},
+      {path: 'store',component:StoreComponent}
   ]
   },
   { path: '',
-    redirectTo: '/home',
+    redirectTo: '/home/songList',
     pathMatch: 'full' 
   },
   {
@@ -61,6 +63,7 @@ const appRoutes : Routes = [
     SingComponent,
     TimeformatPipe,
     SplitPipe,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,34 @@
+<style>
+    .hidden{
+        display: none;
+    }
+</style>
+<div>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+    </ul>
+</div>
+<script>
+    let currentTime = 0
+    let ulList = document.getElementById('ul').children
+    window.onload = function(){
+        // console.log(ulList.length)
+        let timeout = setInterval(() => {
+            // for (let index = 0; index < ulList.length; index++) {
+                //     // ulList[index].setAttribute('class','hidden')
+                // }
+                ulList[currentTime].setAttribute('class','hidden')
+                currentTime ++
+                if(currentTime == 10){
+                window.clearInterval(timeout)
+            }
+        }, 1000);
+    }
+</script>

@@ -1,0 +1,20 @@
+<div>
+  <div class="grid">
+    <ul class="timeline-list">
+      <li class="active" *ngFor="let item of roundList">
+        <ng-container *ngIf="isOver(item);else tipsTemp">
+              <span class="time">{{item.time | date:'HH:mm'}}</span>
+              <div class="time_count">
+                <p>正在秒杀</p>
+                距结束 <span>{{dayline | timeline}}</span>
+              </div>
+            </ng-container>
+      </li>
+      <ng-template #tipsTemp>
+          <li class="over">
+              <span>已结束</span>
+          </li>
+      </ng-template>
+    </ul>
+  </div>
+</div>
