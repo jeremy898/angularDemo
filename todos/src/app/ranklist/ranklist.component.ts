@@ -10,7 +10,7 @@ export class RanklistComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.http.get('http://47.105.150.105/m-api/toplist/detail').subscribe(res => {
+    this.http.get('http://140.143.128.100:3000/toplist/detail').subscribe(res => {
       this.rankList = res['list']
     })
   }

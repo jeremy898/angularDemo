@@ -7,7 +7,6 @@
         <li routerLink="/home/singlist/312734124" (click)="showSwiper($event)">我的音乐</li>
         <li routerLink="/home/rank" (click)="showSwiper($event)">排行榜</li>
         <li routerLink="/home/singer" (click)="showSwiper($event)">歌手</li>
-        <li routerLink="/home/store"(click)="showSwiper($event)">商城</li>
       </ul>
     </div>
     <div class="seachbar">
@@ -35,7 +34,7 @@
       </div>
     </div>
     <div class="login">
-      <a href="#" style="color:#787878;margin-right: 4px">登录</a>
+      <a href="#" style="color:#ffffff;margin-right: 4px">登录</a>
       <i nz-icon nzType="down"></i>
     </div>
   </nz-header>
@@ -64,7 +63,7 @@
           <a href="javascript:;" style=" color:inherit;"><i nz-icon nzType="step-forward" nzTheme="outline"  (click)="next('next')"></i></a>
          </div>
          <div class="play">
-           <div style="margin-right: 10px;">
+           <div style="margin-right: 20px;">
               <img [src]="playView && playView['al'] && playView['al'].picUrl || 'https://s4.music.126.net/style/web2/img/default/default_album.jpg'" style="width: 34px;height: 34px;" alt="">
            </div>
            <div class="cdbox" style="display: block;">

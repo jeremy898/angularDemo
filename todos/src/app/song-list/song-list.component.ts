@@ -16,7 +16,7 @@ export class SongListComponent implements OnInit {
   ngOnInit() {
     this.http.get('../../assets/list.json').subscribe(res =>{
     })
-    this.http.get('http://47.105.150.105/m-api/personalized').subscribe(res => {
+    this.http.get('http://140.143.128.100:3000/personalized').subscribe(res => {
       this.songList = res['result']
     })
   }
