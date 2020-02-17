@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     lyricList =[]
   ngOnInit() {
     this.init();
-    this.http.get("http://47.105.150.105/m-api/banner").subscribe(res => {
+    this.http.get("http://140.143.128.100:3000/banner").subscribe(res => {
       if (res["code"] !== 200) {
         this.util.message("请求失败,请联系管理员", false, 3000);
       } else {
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
           this.route.children[0].snapshot.params.id) || '';
       if(id){
         this.http
-        .get("http://47.105.150.105/m-api/playlist/detail?id=" + id)
+        .get("http://140.143.128.100:3000/playlist/detail?id=" + id)
         .subscribe(result => {
           this.listOfData = result["playlist"]["tracks"];
           this.playView = result["playlist"]["tracks"].find(item => {
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
       if (res.hasOwnProperty("id")) {
         let id = res.id;
         this.http
-          .get("http://47.105.150.105/m-api/artists?id=" + id)
+          .get("http://140.143.128.100:3000/artists?id=" + id)
           .subscribe(result => {
             this.listOfData = result["hotSongs"];
             this.playView = result["hotSongs"].find(item => {
@@ -175,13 +175,13 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.http
-      .get("http://47.105.150.105/m-api/search/suggest?keywords=" + keywords)
+      .get("http://140.143.128.100:3000/search/suggest?keywords=" + keywords)
       .subscribe(res => {
         this.artists = res["result"] && res["result"]["artists"];
         this.playlists = res["result"] && res["result"]["playlists"];
       });
     this.http
-      .get("http://47.105.150.105/m-api/search?keywords=" + keywords)
+      .get("http://140.143.128.100:3000/search?keywords=" + keywords)
       .subscribe(res => {
         this.songs = res["result"]["songs"];
       });
@@ -268,7 +268,7 @@ export class HomeComponent implements OnInit {
     if(!id){
       return
     }
-    this.http.get('http://47.105.150.105/m-api/lyric?id='+ id).subscribe(res => {
+    this.http.get('http://140.143.128.100:3000/lyric?id='+ id).subscribe(res => {
       if(!res){
         this.util.message('加载歌词有误')
       }

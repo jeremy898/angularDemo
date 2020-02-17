@@ -77,7 +77,7 @@ export class SingerComponent implements OnInit {
   singer = ''
   ngOnInit() {
     this.http
-      .get("http://47.105.150.105/m-api/top/artists?offset=0")
+      .get("http://140.143.128.100:3000/top/artists?offset=0")
       .subscribe(res => {
         this.singerList = res["artists"];
       });
@@ -90,7 +90,7 @@ export class SingerComponent implements OnInit {
       this.isWord = i
       this.word = id.toLocaleLowerCase()
     }
-    this.http.get('http://47.105.150.105/m-api/artist/list?cat='+ this.singer +'&initial='+ this.word +'&offset=0').subscribe(result =>{
+    this.http.get('http://140.143.128.100:3000/artist/list?cat='+ this.singer +'&initial='+ this.word +'&offset=0').subscribe(result =>{
       this.singerList = result['artists']
     })
   }

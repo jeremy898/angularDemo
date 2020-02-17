@@ -14,7 +14,7 @@ export class ArtistComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(res => {
       let id = res.id
-      this.http.get('http://47.105.150.105/m-api/artists?id='+ id).subscribe(result => {
+      this.http.get('http://140.143.128.100:3000:3000/artists?id='+ id).subscribe(result => {
         this.listOfData = result['hotSongs']
         this.playlist = result['artist']
       })

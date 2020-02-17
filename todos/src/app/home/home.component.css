@@ -4,9 +4,14 @@
 
   nz-header,
   nz-footer {
-    padding: 0 300px;
-    background: rgba(206, 61, 62);
+    /* padding: 0 300px; */
+    /* background: rgba(206, 61, 62); */
+    background: #a18fff;
     color: #fff;
+    /* margin: 0 auto; */
+  }
+  nz-header{
+    display: flex;
   }
 
   nz-footer {
@@ -20,7 +25,7 @@
 
   nz-content {
     background: #fff ;
-    padding: 0 200px; 
+    /* padding: 0 200px;  */
     color: #fff;
     min-height: 120px;
     line-height: 120px;
@@ -34,38 +39,64 @@
     margin: 0;
   }
   .logo {
-    position: absolute;
-    width: 150px;
-    height: 48px;
-    background: url("../../assets/logo.png") no-repeat left center;
-    background-size: cover;
+    /* position: absolute; */
+    /* width: 150px; */
+    /* height: 65px; */
+    width: 300px;
+    min-width: 150px;
+    background: url("../../assets/logo_new.png") no-repeat left center;
+    background-size: 80%;
     top: 5px;
+    margin-left: 150px;
   }
   .tabs-list{
     /* height: 100%; */
-    position: absolute;
+    /* position: absolute; */
     left: 400px;
+    min-width: 25em;
+    width: 34%;
+  }
+  .tabs-list ul{
+    margin: 0;
+    padding:0;
+    width: 100%;
+    display: inline-flex;
   }
   .tabs-list ul>li{
-    width: 100px;
+    /* max-width: 100px; */
+    flex: 1;
+    margin-right: 1em;
+    min-width: 4em;
+    /* width: 100px; */
     line-height: 65px;
-    float: left;
+    /* display: inline-flex; */
+    /* float: left; */
     list-style: none;
+    transition: all ease-in 0.2s;
   }
   .tabs-list ul>li:hover{
-      background-color: rgba(15, 17, 19, 0.4);
+      background-color: rgb(169, 152, 253);
+      /* background-color: rgba(15, 17, 19, 0.4); */
+      cursor: pointer;
   }
   .seachbar{
-    position: absolute;
-    right: 650px; 
-    width: 200px;
+    /* position: absolute; */
+    /* right: 650px;  */
+    /* width: 200px; */
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
   }
   .login{
-      position: absolute;
-      right: 250px;
+      /* position: absolute; */
+      flex: 1;
+      /* right: 10%; */
+      /* padding-left: 150px; */
   }
   .swiper-container {
-    height: 300px;
+    /* height: 300px; */
+    height: unset;
+    /* height: calc(100% * 0.37px); */
 }  
 .swiper-slide img{
     width: 100%;
@@ -97,17 +128,19 @@
 }
 .player{
   display: flex;
-  padding: 0 550px;
+  /* width: 800px; */
+  padding: 0 50px;
   color: #fff;
 }
 .play{
   font-size: 14px;
   color: #fff;
   display: flex;
+  flex-grow: 1;
   line-height: 1em;
 }
 .process {
-  width: 500px;
+  /* width: 500px; */
   height: 10px;
   background-color: rgb(83, 83, 83);
 }
@@ -123,7 +156,7 @@
     width: 18px;
     height: 20px;
     top: 50%;
-    right: -10px;
+    right: -20px;
     transform:translate(-50%,-50%);
     border-radius: 50%;
     background-color: rgb(245, 245, 245);
@@ -140,6 +173,9 @@
     position: absolute;
     transform:translate(-50%,-50%);
     border-radius: 50%;
+}
+.cdbox{
+  flex-grow: 1;
 }
 .sound{
   position: relative;
